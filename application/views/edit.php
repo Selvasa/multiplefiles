@@ -12,7 +12,7 @@
 <body>
         
 <div class='container-fluid cont '>
-            <form class='text-black lead pb-4 pt-3' method='post' action='<?php echo base_url('index.php/Crudcontroller/update')?>'>
+            <form class='text-black lead pb-4 pt-3' method='post' enctype='multipart/form-data' action='<?php echo base_url('index.php/Crudcontroller/update')?>'>
                 <div class=' container'>
                       <?php 
                       if(isset($datas)){
@@ -41,6 +41,10 @@
                         <div class='col-sm-5 pt-4'>
                             <label class='form-label ps-1 pb-2'> <i class="bi bi-telephone-forward-fill"></i> Ph No : </label>
                             <input  class='form-control' name='phno' value='<?php echo$datas[0]->phno?>'  />
+                        </div>
+                        <div class='col-sm-5 pt-4'>
+                            <label class='form-label ps-1 pb-2'> <i class="bi bi-telephone-forward-fill"></i> File : </label>
+                            <input type='file' class='form-control' name='file' value='<?php echo$datas[0]->file?>'  />
                         </div>
                     </div>
                    

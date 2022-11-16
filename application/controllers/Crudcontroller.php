@@ -1,6 +1,8 @@
 <?php
-require 'vendor/autoload.php';
+
+// require 'vendor/autoload.php';
 use Dompdf\Dompdf;
+
 class Crudcontroller extends CI_Controller{
     
     public function index(){
@@ -9,13 +11,24 @@ class Crudcontroller extends CI_Controller{
 
     // Add data 
     function addtotable(){
-        $data=array(
-            'name'=>$this->input->post('name'),
-            'email'=>$this->input->post('email'),
-            'password'=>$this->input->post('password'),
-            'phno'=>$this->input->post('phno')
-        );
+        
         $this->load->model('Crudmodel');
+        
+        $data['name']=$this->input->post('name');
+        $data['email']=$this->input->post('email');
+        $data['password']=$this->input->post('password');
+        $data['phno']=$this->input->post('phno');
+
+        // get file upload file into database with valid name
+        $config['upload_path']='./assets/image/';
+        $config['allowed_types']='pdf|jpg|png|jpeg|mp3|mp4|zip|doc';
+        $config['max_size']=1024*5;
+        
+        $this->load->library('upload',$config);
+
+        $this->upload->do_upload('file');
+        $result=$this->upload->data();
+        $data['file']= $result['file_name'];
         $this->Crudmodel->setvalue($data);
         redirect('crudcontroller/printvalue');
     }
@@ -31,11 +44,13 @@ class Crudcontroller extends CI_Controller{
     function edit($id){
         $this->load->model('crudmodel');
         $data['datas']=$this->crudmodel->edit($id);
+       //have work bending
         $this->load->view('edit',$data);
     }
 
     // Update date
     function update(){
+        $this->load->model('crudmodel');
         $id=$this->input->post('id');
         $data=array(
             'name'=>$this->input->post('name'),
@@ -43,7 +58,20 @@ class Crudcontroller extends CI_Controller{
             'password'=>$this->input->post('password'),
             'phno'=>$this->input->post('phno')
         );
-        $this->load->model('crudmodel');
+        $config['upload_path']='./assets/image/';
+        $config['allowed_types']='pdf|jpg|png|jpeg|mp3|mp4|zip|doc';
+        $config['max_size']=1024*5;
+        // $config['overwrite'] = TRUE;
+        $this->load->library('upload',$config);
+        $this->upload->overwrite = true;
+
+        $this->upload->do_upload('file');
+      
+        $result=$this->upload->data();
+        
+        $data['file']= $result['file_name'];
+       
+        
         $this->crudmodel->updatemodel($id,$data);
         redirect('crudcontroller/printvalue');
     }
