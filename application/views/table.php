@@ -18,17 +18,17 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>id</th>
                     <th>name</th>
-                    <th>file</th>
+                    <th>download</th>
                 </tr>
             </thead>
             <tbody>
             <?php foreach($value as $row){?>
                 <tr>
-                    <td><?= $row->id?></td>
-                    <td><?= $row->name?></td>
                     <td><?= $row->file?></td>
+                    <!-- <td><?= $data['file_type']?></td>
+                    <td><?= $data['file_size']?></td> -->
+                    <td><a href="<?php echo base_url("index.php/multiple_c/download")?>">download</a></td>
                 </tr>
                 <?php }?>
             </tbody>

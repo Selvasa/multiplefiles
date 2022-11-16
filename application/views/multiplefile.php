@@ -14,10 +14,10 @@
 </head>
 <body>
     <div class="container mt-5 w-50">
-        <form method="post" enctype="multipart/form-data" action="<?php echo base_url()."index.php/multiple_c/insert"?>">
-            Name :
-            <input type="text" name="name" class="form-control"/><br>
-            <input type="file" name="file" class="form-control"/>
+        <form method="post" enctype="multipart/form-data"  action="<?php echo base_url()."index.php/multiple_c/insert"?>">
+            <!-- Name :
+            <input type="text" name="name" class="form-control"/><br> -->
+            <input type="file" name="files[]"  multiple="" class="form-control"/>
             <input type="submit" class="form-control mt-5 w-25"/>
         </form>
     </div>
