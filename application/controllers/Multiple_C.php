@@ -22,7 +22,7 @@ class Multiple_C extends CI_Controller{
         $config['upload_path']="./assets/image";
         $config['allowed_types']="jpg|png|jpeg|pdf|mp4|txt";
         $config['max_size']=1024*5;
-        // $config['file_name']=$_FILES['files']['name'][$i];  
+        $config['file_name']=$_FILES['files']['name'][$i];  
         
         $this->load->library("upload",$config); 
     // get data from data base  and print value
@@ -53,9 +53,10 @@ class Multiple_C extends CI_Controller{
         $this->load->model("Multiple_M");
         $result =$this->Multiple_M->download($id);
         
-        // print_r($result);
-        $file="assets/image/".$result["file"];
-        force_download($file, NULL);
+        print_r(force_download('./assets/image/'.$result['id'], NULL));
+        // $file="./assets/image/".$result["file"];
+        // force_download($file, NULL);
+        // force_download('./assets/image/'.$result['id'], NULL);
 
     }
 
