@@ -9,8 +9,9 @@ class Multiple_C extends CI_Controller{
     public function insert(){
 
     // file configeration 
-   
-    $multi=count($_FILES['files']['name']);
+    // $data=[];
+    $multi[]=count($_FILES['files']['name']);
+
     for($i=0;$i<$multi;$i++){
         $_FILES['file']['name']=$_FILES['files']['name'][$i];
         $_FILES['file']['type']=$_FILES['files']['type'][$i];
@@ -21,23 +22,22 @@ class Multiple_C extends CI_Controller{
         $config['upload_path']="./assets/image";
         $config['allowed_types']="jpg|png|jpeg|pdf|mp4|txt";
         $config['max_size']=1024*5;
-    
+        // $config['file_name']=$_FILES['files']['name'][$i];  
+        
         $this->load->library("upload",$config); 
     // get data from data base  and print value
          if($this->upload->do_upload("file")){
             $value=$this->upload->data();
-            $data['file']=$value['file_name'];
+
+            $data[$i]['file']=$value['file_name'];
+            // print_r($data);
             $this->load->model("Multiple_M");
             $this->Multiple_M->fileinsert($data);
-            $this->load->model("Multiple_M");
-            $value['value']=$this->Multiple_M->getfile();
             redirect("Multiple_C/print");
         }
         else{
             echo "false";
-
             } 
-            
     }
      
     }
@@ -46,10 +46,17 @@ class Multiple_C extends CI_Controller{
     public function print(){
         $this->load->model("Multiple_M");
         $value['value']=$this->Multiple_M->getfile();
-        $this->load->view('table',$value);
+        $this->load->view('table', $value);
     }
-    public function download(){
-        echo "hi";
+     function download($id){
+        $this->load->helper('download');
+        $this->load->model("Multiple_M");
+        $result =$this->Multiple_M->download($id);
+        
+        // print_r($result);
+        $file="assets/image/".$result["file"];
+        force_download($file, NULL);
+
     }
 
 }

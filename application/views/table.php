@@ -19,16 +19,17 @@
             <thead>
                 <tr>
                     <th>name</th>
+                    <th>image</th>
                     <th>download</th>
                 </tr>
             </thead>
             <tbody>
             <?php foreach($value as $row){?>
                 <tr>
+   
                     <td><?= $row->file?></td>
-                    <!-- <td><?= $data['file_type']?></td>
-                    <td><?= $data['file_size']?></td> -->
-                    <td><a href="<?php echo base_url("index.php/multiple_c/download")?>">download</a></td>
+                    <td><img src="<?php echo base_url().'./assets/image/'.$row->file ?>" width="100px" height="100px" alt="logo"></td>
+                    <td><a href="<?php echo base_url("index.php/multiple_c/download/".$row->id)?>">download</a></td>
                 </tr>
                 <?php }?>
             </tbody>
