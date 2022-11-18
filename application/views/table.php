@@ -24,14 +24,17 @@
                 </tr>
             </thead>
             <tbody>
-            <?php foreach($value as $row){?>
+            <?php 
+            foreach($result as $row){
+                
+                ?>
                 <tr>
    
                     <td><?= $row->file?></td>
-                    <td><img src="<?php echo base_url().'./assets/image/'.$row->file ?>" width="100px" height="100px" alt="logo"></td>
+                    <td><img src="<?php echo base_url().'./assets/image/'.$row->file?>" width="100px" height="100px" alt="logo"></td>
                     <td><a href="<?php echo base_url("index.php/multiple_c/download/".$row->id)?>">download</a></td>
                 </tr>
-                <?php }?>
+                <?php } ?>
             </tbody>
 
         </table>
