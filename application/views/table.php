@@ -31,8 +31,8 @@
                 <tr>
    
                     <td><?= $row->file?></td>
-                    <td><img src="<?php echo base_url().'./assets/image/'.$row->file?>" width="100px" height="100px" alt="logo"></td>
-                    <td><a href="<?php echo base_url("index.php/multiple_c/download/".$row->id)?>">download</a></td>
+                    <td><img src="<?php echo base_url().'./assets/image/'.$row->file?>" width="100px" height="100px"> </td>
+                    <td><a href="<?php echo base_url('index.php/multiple/download'.'/assets/image/'.$row->file) ?>">download</a></td>
                 </tr>
                 <?php } ?>
             </tbody>

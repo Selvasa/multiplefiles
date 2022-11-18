@@ -23,6 +23,9 @@ class Multiple_M extends CI_Model{
         $this->load->database();
         $this->db->where('id',$id);
         return $this->db->get('files')->result();
+            // echo "<pre>";
+            // print_r($data);
+            // echo "<pre>";
     }
 
 }
